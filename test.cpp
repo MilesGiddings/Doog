@@ -1,5 +1,6 @@
 #include "raylib.h"
 #include "raymath.h"
+#include "Level.h"
 
 /*
 TO COMPILE
@@ -13,15 +14,19 @@ int main()
     const int screenHeight = 450;
 
     InitWindow(screenWidth, screenHeight, "Simple Character Movement");
-    SetTargetFPS(60);
+    SetTargetFPS(120); // If -1 is set, the program will run as fast as possible : This could be useful for pacing/ scaling the game diffuculty
 
     float playerX = screenWidth / 2;
     float playerY = screenHeight / 2;
     float playerSpeed = 5.0f;
     const int playerSize = 40;
 
+    Level level(10); // Create a level with 10 walls
+
     while (!WindowShouldClose())
     {
+        level.DrawWalls();
+        DrawFPS(725, 0);
         if (IsKeyDown(KEY_RIGHT))
             playerX += playerSpeed;
         if (IsKeyDown(KEY_LEFT))
