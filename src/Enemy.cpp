@@ -1,5 +1,10 @@
-#include "Enemy.h"  
-#include "raylib.h"  
+#include "raylib.h"
+#include "Player.h"
+#include "Level.h"
+#include "Enemy.h"
+#include "Utility.h"
+#include "Wall.h"
+#include "GameObject.h"
 
 int Enemy::totalCats = 0;  
 
