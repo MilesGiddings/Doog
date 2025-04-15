@@ -1,17 +1,18 @@
-#include "Level.h"  
+#include "Level.h"
 
-Level::Level(int numWalls) : numWalls(numWalls) {  
-    walls = new Wall*[numWalls];  
-    for (int i = 0; i < numWalls; i++) {  
-        walls[i] = new Wall(i * 4.0f, 0.0f, 0.0f);  
-    }  
-}  
+Level::Level() {
+    // Example: Create a simple 3D maze
+    walls.emplace_back(0.0f, 2.0f, 5.0f, 10.0f, 4.0f, 1.0f); // Wall at (0, 2, 5)
+    walls.emplace_back(5.0f, 2.0f, 0.0f, 1.0f, 4.0f, 10.0f); // Wall at (5, 2, 0)
+}
 
-Level::~Level() {  
-    for (int i = 0; i < numWalls; i++) delete walls[i];  
-    delete[] walls;  
-}  
+void Level::Draw() const {
+    for (const auto& wall : walls) wall.Draw();
+}
 
-void Level::DrawWalls() const {  
-    for (int i = 0; i < numWalls; i++) walls[i]->Draw();  
-}  
+bool Level::CheckCollision(const BoundingBox& playerBounds) {
+    for (const auto& wall : walls) {
+        if (CheckCollisionBoxes(playerBounds, wall.GetBounds())) return true;
+    }
+    return false;
+}

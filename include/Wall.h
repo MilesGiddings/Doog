@@ -1,12 +1,10 @@
-#pragma once  
-#include "GameObject.h"  
+#pragma once
+#include "GameObject.h"
 
-class Wall : public GameObject {  
-private:  
-    const Color WALL_COLOR = GRAY; // Const data  
-    static int totalWalls;         // Static data  
-public:  
-    Wall(float x, float y, float z);  
-    ~Wall();  
-    void Draw() const override;  
-};  
+class Wall : public GameObject {
+private:
+    Vector3 size;
+public:
+    Wall(float x, float y, float z, float width, float height, float depth);
+    void Draw() const override;
+};

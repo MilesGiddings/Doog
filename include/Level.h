@@ -1,12 +1,12 @@
-#pragma once  
-#include "Wall.h"  
+#pragma once
+#include "Wall.h"
+#include <vector>
 
-class Level {  
-private:  
-    Wall** walls; // Dynamic array  
-    int numWalls;  
-public:  
-    Level(int numWalls);  
-    ~Level();  
-    void DrawWalls() const;  
-};  
+class Level {
+private:
+    std::vector<Wall> walls; // Dynamic array of walls
+public:
+    Level();
+    void Draw() const;
+    bool CheckCollision(const BoundingBox& playerBounds);
+};

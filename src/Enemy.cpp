@@ -12,7 +12,7 @@ Enemy::~Enemy() {
 }  
 
 void Enemy::Draw() const {  
-    DrawCube(position, 2.0f, 4.0f, 2.0f, ORANGE);  
+    DrawCube(position, 1.0f, 2.0f, 1.0f, ORANGE);  
 }
 
 void Enemy::Update() {

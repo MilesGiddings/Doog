@@ -1,16 +1,16 @@
-#include "Wall.h"  
-#include "raylib.h"  
+#include "Wall.h"
+#include "raylib.h"
 
-int Wall::totalWalls = 0;  
+Wall::Wall(float x, float y, float z, float w, float h, float d) 
+    : GameObject(x, y, z), size({w, h, d}) {
+    bounds = {
+        {x - w/2, y - h/2, z - d/2},
+        {x + w/2, y + h/2, z + d/2}
+    };
+}
 
-Wall::Wall(float x, float y, float z) : GameObject(x, y, z) {  
-    totalWalls++;  
-}  
-
-Wall::~Wall() {  
-    totalWalls--;  
-}  
-
-void Wall::Draw() const {  
-    DrawCube(position, 2.0f, 4.0f, 2.0f, WALL_COLOR);  
-}  
+void Wall::Draw() const {
+    DrawCube(position, size.x, size.y, size.z, GRAY);
+    // Optional: Draw bounding box for debugging
+    // DrawBoundingBox(bounds, RED);
+}

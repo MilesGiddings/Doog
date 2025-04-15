@@ -1,42 +1,35 @@
-#include "raylib.h"  
-#include "Player.h"  
-#include "Level.h"  
+#include "raylib.h"
+#include "Player.h"
+#include "Level.h"
 
+int main() {
+    InitWindow(800, 600, "Doog");
+    SetTargetFPS(60);// If -1 is set, the program will run as fast as possible : This could be useful for pacing/ scaling the game diffuculty
+    SetExitKey(0); // Disable ESC key to exit
+    EnableCursor();
 
-// To RUN 
-//  make 
-// ./build/Doog
+    Player player(0.0f, 1.0f, 0.0f);
+    Level level;
 
-int main() {  
-    const int screenWidth = 800;  
-    const int screenHeight = 450;  
+    while (!WindowShouldClose()) {
+        DrawFPS(725, 0);
+        player.Update();
 
-    InitWindow(screenWidth, screenHeight, "Doog");  
-    SetTargetFPS(60);  
+        // Collision check (optional)
+        BoundingBox playerBounds = player.GetBounds();
+        if (level.CheckCollision(playerBounds)) {
+            // Handle collision (e.g., reset position)
+        }
 
-    Player player(screenWidth/2, 0.0f, screenHeight/2);  
-    Level level(10);  
+        BeginDrawing();
+            ClearBackground(RAYWHITE);
+            BeginMode3D(player.GetCamera());
+                level.Draw();
+                player.Draw(); // Optional: Draw player model
+            EndMode3D();
+        EndDrawing();
+    }
 
-    Camera camera = { 0 };  
-    camera.position = (Vector3){ 0.0f, 10.0f, 10.0f };  
-    camera.target = player.GetPosition();  
-    camera.up = (Vector3){ 0.0f, 1.0f, 0.0f };  
-    camera.fovy = 60.0f;  
-    camera.projection = CAMERA_PERSPECTIVE;  
-
-    while (!WindowShouldClose()) {  
-        player.Update();  
-        camera.target = player.GetPosition(); 
-
-        BeginDrawing();  
-            ClearBackground(RAYWHITE);  
-            BeginMode3D(camera);  
-                level.DrawWalls();  
-                player.Draw();  
-            EndMode3D();  
-        EndDrawing();  
-    }  
-
-    CloseWindow();  
-    return 0;  
-}  
+    CloseWindow();
+    return 0;
+}

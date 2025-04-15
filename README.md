@@ -4,7 +4,7 @@
 ---
 
 ## **Description**  
-**Doog** is a fast-paced 3D maze game where you play as **Doogguy**, a brave canine warrior tasked with defending your backyard from an army of mischievous cats! Use your bark attacks, avoid claw swipes, and navigate a dynamic maze filled with power-ups and surprises. Built with **Raylib** and C++, this game combines OOP principles with chaotic cat-dog warfare.  
+**Doog** is a fast-paced FPS where you play as **Doogguy**, a brave canine warrior tasked with defending your backyard from an army of mischievous cats! Use your bark attacks, avoid claw swipes, and navigate a dynamic maze filled with power-ups and surprises. Built with **Raylib** and C++, this game combines OOP principles with chaotic cat-dog warfare.  
 
 ---
 
@@ -39,7 +39,7 @@
 
 ### **Class Structure (OOP Highlights)**
 **Class**	Key Features
-**Playe**	Inherits GameObject, uses const float SPEED, virtual Update().
+**Player**	Inherits GameObject, uses const float SPEED, virtual Update().
 **Enemy**	Overloaded Patrol() method, static totalCats counter.
 **Bone**	Dynamic memory allocation for bone spawns.
 **Maze**	Static array for walls, dynamic array for power-ups.
