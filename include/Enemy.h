@@ -18,4 +18,5 @@ public:
     ~Enemy();
     void Update() override; // Correct: overrides virtual method
     void Draw() const override;
+    void Patrol(bool patrol); // Method to handle enemy patrol behavior
 };
