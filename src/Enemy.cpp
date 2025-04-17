@@ -8,9 +8,12 @@
 
 int Enemy::totalCats = 0;  
 
-Enemy::Enemy(float x, float y, float z) : GameObject(x, y, z) {  
-    totalCats++;  
-}  
+Enemy::Enemy(float x, float y, float z, Player* player) 
+    : GameObject(x, y, z), playerRef(player) {
+    totalCats++;
+}
+
+
 
 Enemy::~Enemy() {  
     totalCats--;  
@@ -35,9 +38,26 @@ void Enemy::Patrol(bool patrol){
     }
 }
 
+
 void Enemy::Update() {
     // Add enemy logic here (e.g., patrol, chase player)
-    // Simple movement logic: move back and forth along the x-axis
-    Patrol(false);
+    // For now, leave it empty if not needed:
+    // (But it must be defined to resolve the linker error)
+    Patrol(false); // Call patrol method
+    if (!playerRef) return;
 
-}  
+    // Get player position directly
+    Vector3 playerPos = playerRef->GetPosition();
+    
+    // Calculate direction
+    Vector3 direction = Vector3Subtract(playerPos, position);
+    float distance = Vector3Length(direction);
+    
+    if (distance < 5.0f) { // Chase if within 5 units
+        direction = Vector3Normalize(direction);
+        
+        // Movement with GetFrameTime() for frame-rate independence
+        position = Vector3Add(position, 
+            Vector3Scale(direction, BASE_SPEED * GetFrameTime())); // Move towards player #### IF YOU REMOVE GETFRAMETIME, THE ENEMY WILL TELEPORT
+    }
+}

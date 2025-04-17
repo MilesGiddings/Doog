@@ -20,8 +20,8 @@ void Player::Update() {
     float deltaTime = GetFrameTime();
 
     // 1. Handle sprint first
-    float baseSpeed = 50.0f;
-    float sprintSpeed = 100.0f;
+    float baseSpeed = 25.0f;
+    float sprintSpeed = 50.0f;
     float currentMoveSpeed = baseSpeed;
     
     if (IsKeyDown(KEY_LEFT_SHIFT)) {

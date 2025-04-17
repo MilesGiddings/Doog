@@ -17,4 +17,5 @@ public:
     void Update() override;
     void Draw() const override;
     Camera3D& GetCamera() { return camera; }
+    Vector3 GetPosition() const { return camera.position; }
 };

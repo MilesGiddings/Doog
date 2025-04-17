@@ -9,12 +9,12 @@
 int main() {
     InitWindow(1920, 1080, "Doog");
     ToggleBorderlessWindowed();
-    SetTargetFPS(120);// If -1 is set, the program will run as fast as possible : This could be useful for pacing / scaling the game diffuculty
+    SetTargetFPS(60);// If -1 is set, the program will run as fast as possible : This could be useful for pacing / scaling the game diffuculty
     SetExitKey(KEY_ESCAPE); // Enable ESC key to exit
     DisableCursor();
     
     Player player(0.0f, 5.0f, 0.0f);
-    Enemy enemy(0.0f, 1.0f, 0.0f); // Create an enemy instance
+    Enemy enemy(10.0f, 1.0f, 0.0f, &player); // Create an enemy instance
     Level level;
 
     while (!WindowShouldClose()) {
