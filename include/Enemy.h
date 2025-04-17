@@ -21,4 +21,5 @@ public:
     void Update() override; // Correct: overrides virtual method
     void Draw() const override;
     void Patrol(bool patrol); // Patrol method
+    void Chase(); // Chase player method
 };

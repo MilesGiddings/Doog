@@ -22,7 +22,7 @@ Enemy::~Enemy() {
 void Enemy::Draw() const {  
     DrawCube(position, 1.0f, 2.0f, 1.0f, ORANGE);  
 }
-void Enemy::Patrol(bool patrol){
+void Enemy::Patrol(bool patrol) {
     static bool movingRight = true;
     if (!patrol) return; // If not patrolling, do nothing
     if (movingRight) {
@@ -37,15 +37,9 @@ void Enemy::Patrol(bool patrol){
         }
     }
 }
-
-
-void Enemy::Update() {
-    // Add enemy logic here (e.g., patrol, chase player)
-    // For now, leave it empty if not needed:
-    // (But it must be defined to resolve the linker error)
-    Patrol(false); // Call patrol method
+void Enemy::Chase() {
+    // Chase logic
     if (!playerRef) return;
-
     // Get player position directly
     Vector3 playerPos = playerRef->GetPosition();
     
@@ -60,4 +54,11 @@ void Enemy::Update() {
         position = Vector3Add(position, 
             Vector3Scale(direction, BASE_SPEED * GetFrameTime())); // Move towards player #### IF YOU REMOVE GETFRAMETIME, THE ENEMY WILL TELEPORT
     }
+}
+
+
+void Enemy::Update() {
+    // Add enemy logic here (e.g., patrol, chase player)
+    Patrol(true); // Call patrol method
+    Chase(); // Call chase method
 }
