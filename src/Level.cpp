@@ -8,8 +8,21 @@
 
 Level::Level() {
     // Example: Create a simple 3D maze
-    walls.emplace_back(0.0f, 2.0f, 5.0f, 10.0f, 4.0f, 1.0f); // Wall at (0, 2, 5)
-    walls.emplace_back(5.0f, 2.0f, 0.0f, 1.0f, 4.0f, 10.0f); // Wall at (5, 2, 0)
+    walls.push_back(Wall(0.0f, 0.0f, 0.0f, 10.0f, 2.0f, 1.0f)); // Wall at origin
+    walls.push_back(Wall(10.0f, 0.0f, 0.0f, 1.0f, 2.0f, 10.0f)); // Wall to the right
+    walls.push_back(Wall(0.0f, 0.0f, 10.0f, 10.0f, 2.0f, 1.0f)); // Wall at the back
+    walls.push_back(Wall(-10.0f, 0.0f, 0.0f, 1.0f, 2.0f, 10.0f)); // Wall to the left
+    walls.push_back(Wall(0.0f, 0.0f, -10.0f, 10.0f, 2.0f, 1.0f)); // Wall at the front
+    walls.push_back(Wall(5.0f, 0.0f, 5.0f, 1.0f, 2.0f, 1.0f)); // Wall in the middle
+    walls.push_back(Wall(-5.0f, 0.0f, -5.0f, 1.0f, 2.0f, 1.0f)); // Wall in the middle
+    walls.push_back(Wall(0.0f, 0.0f, 5.0f, 1.0f, 2.0f, 1.0f)); // Wall in the middle
+    walls.push_back(Wall(5.0f, 0.0f, 0.0f, 1.0f, 2.0f, 1.0f)); // Wall in the middle
+    walls.push_back(Wall(-5.0f, 0.0f, 5.0f, 1.0f, 2.0f, 1.0f)); // Wall in the middle
+    walls.push_back(Wall(0.0f, 0.0f, -5.0f, 1.0f, 2.0f, 1.0f)); // Wall in the middle
+    walls.push_back(Wall(5.0f, 0.0f, -5.0f, 1.0f, 2.0f, 1.0f)); // Wall in the middle
+    walls.push_back(Wall(-5.0f, 0.0f, -5.0f, 1.0f, 2.0f, 1.0f)); // Wall in the middle
+    walls.push_back(Wall(0.0f, 0.0f, -5.0f, 1.0f, 2.0f, 1.0f)); // Wall in the middle
+    walls.push_back(Wall(5.0f, 0.0f, -5.0f, 1.0f, 2.0f, 1.0f)); // Wall in the middle
 }
 
 void Level::Draw() const {

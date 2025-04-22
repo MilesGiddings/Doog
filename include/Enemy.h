@@ -14,12 +14,16 @@ class Enemy : public GameObject {
 private:
     static int totalCats;
     const float BASE_SPEED = 5.0f; // Speed of the enemy
+    int health = 125; // Health of the enemy 
     Player* playerRef; // Reference to the player
 public:
     Enemy(float x, float y, float z, Player* player);
     ~Enemy();
+    int total(); // Static method to get total cats
     void Update() override; // Correct: overrides virtual method
     void Draw() const override;
     void Patrol(bool patrol); // Patrol method
     void Chase(); // Chase player method
+    void Attack(); // Attack player method
+    void TakeDamage(int damage); // Take damage method
 };

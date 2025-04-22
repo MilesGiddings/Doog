@@ -5,6 +5,8 @@
 #include "Utility.h"
 #include "Wall.h"
 #include "GameObject.h"
+#include <iostream>
+using namespace std;
 
 int main() {
     InitWindow(1920, 1080, "Doog");
@@ -19,8 +21,17 @@ int main() {
 
     while (!WindowShouldClose()) {
         DrawFPS(1365, 0);
+        string eTotal = std::to_string(enemy.total());
+        eTotal = "Total Cats: " + eTotal;
+        const char* trueTotal = eTotal.c_str();
+        DrawText(trueTotal, 1300, 20, 20, BLUE);
+        string pHealth = std::to_string(player.getHealth());
+        pHealth = "Health " + pHealth;
+        const char* trueHealth = pHealth.c_str();
+        DrawText(trueHealth, 1100, 20, 20, BLUE);
         enemy.Update();
         player.Update();
+
         
 
         // Collision check (optional)
