@@ -7,12 +7,19 @@
 #include "Wall.h"
 #include "GameObject.h"
 #include <vector>
-
 class Level {
 private:
-    std::vector<Wall> walls; // Dynamic array of walls
+    int mazeWidth;
+    int mazeHeight;
+    int roomSize;
+    int corridorSize;
+
+    std::vector<Wall> walls;  // List of walls in the maze
+
 public:
-    Level();
-    void Draw() const;
-    bool CheckCollision(const BoundingBox& playerBounds);
+    Level();  // Constructor
+
+    void GenerateMap();  // Function to generate the maze
+    void Draw() const;  // Function to draw the maze and floor/ceiling
+    bool CheckCollision(const BoundingBox& playerBounds);  // Function to check for collisions
 };

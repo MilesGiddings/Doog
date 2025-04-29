@@ -18,6 +18,7 @@ int main() {
     Player player(0.0f, 5.0f, 0.0f);
     Enemy enemy(10.0f, 1.0f, 0.0f, &player); // Create an enemy instance
     Level level;
+    level.GenerateMap(); // Generate the map with walls
 
     while (!WindowShouldClose()) {
         // Collision check (optional)
@@ -33,8 +34,9 @@ int main() {
                 player.Draw(); // Optional: Draw player model
                 enemy.Draw(); // Optional: Draw enemy model
             EndMode3D();
-            DrawCircle(GetScreenWidth()/2, GetScreenHeight()/2, 5, RED);
+            DrawCircle(GetScreenWidth()/2, GetScreenHeight()/2, 5, GREEN);
         EndDrawing();
+
         DrawFPS(1365, 0);
         string eTotal = std::to_string(enemy.total());
         eTotal = "Total Cats: " + eTotal;

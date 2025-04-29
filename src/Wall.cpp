@@ -6,16 +6,14 @@
 #include "Wall.h"
 #include "GameObject.h"
 
-Wall::Wall(float x, float y, float z, float w, float h, float d) 
-    : GameObject(x, y, z), size({w, h, d}) {
-    bounds = {
-        {x - w/2, y - h/2, z - d/2},
-        {x + w/2, y + h/2, z + d/2}
-    };
-}
+Wall::Wall(float x, float y, float z, float width, float height, float depth, bool entrance)
+    : position({x, y, z}), size({width, height, depth}), isEntrance(entrance) {}
+
 
 void Wall::Draw() const {
-    DrawCube(position, size.x, size.y, size.z, GRAY);
-    // Optional: Draw bounding box for debugging
-    // DrawBoundingBox(bounds, RED);
+    if (isEntrance) {
+        DrawCube(position, size.x, size.y, size.z, GREEN);  // Draw green wall for entrance
+    } else {            
+        DrawCube(position, size.x, size.y, size.z, GRAY);   // Default wall color
+    }
 }

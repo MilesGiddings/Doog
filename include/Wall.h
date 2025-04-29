@@ -7,10 +7,21 @@
 #include "Wall.h"
 #include "GameObject.h"
 
-class Wall : public GameObject {
-private:
-    Vector3 size;
-public:
-    Wall(float x, float y, float z, float width, float height, float depth);
-    void Draw() const override;
-};
+class Wall {
+    private:
+        Vector3 position;  // Position of the wall
+        Vector3 size;      // Size of the wall (width, height, depth)
+        bool isEntrance;   // Whether the wall is part of the entrance
+    public:
+        Wall(float x, float y, float z, float width, float height, float depth, bool entrance = false);
+    
+        void Draw() const;
+    
+        // New method to get the bounds of the wall for collision detection
+        BoundingBox GetBounds() const {
+            return { 
+                {position.x - size.x / 2, position.y - size.y / 2, position.z - size.z / 2}, // Min corner
+                {position.x + size.x / 2, position.y + size.y / 2, position.z + size.z / 2}  // Max corner
+            };
+        }
+    };
