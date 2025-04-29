@@ -20,20 +20,6 @@ int main() {
     Level level;
 
     while (!WindowShouldClose()) {
-        DrawFPS(1365, 0);
-        string eTotal = std::to_string(enemy.total());
-        eTotal = "Total Cats: " + eTotal;
-        const char* trueTotal = eTotal.c_str();
-        DrawText(trueTotal, 1300, 20, 20, BLUE);
-        string pHealth = std::to_string(player.getHealth());
-        pHealth = "Health " + pHealth;
-        const char* trueHealth = pHealth.c_str();
-        DrawText(trueHealth, 1100, 20, 20, BLUE);
-        enemy.Update();
-        player.Update();
-
-        
-
         // Collision check (optional)
         BoundingBox playerBounds = player.GetBounds();
         if (level.CheckCollision(playerBounds)) {
@@ -47,7 +33,19 @@ int main() {
                 player.Draw(); // Optional: Draw player model
                 enemy.Draw(); // Optional: Draw enemy model
             EndMode3D();
+            DrawCircle(GetScreenWidth()/2, GetScreenHeight()/2, 5, RED);
         EndDrawing();
+        DrawFPS(1365, 0);
+        string eTotal = std::to_string(enemy.total());
+        eTotal = "Total Cats: " + eTotal;
+        const char* trueTotal = eTotal.c_str();
+        DrawText(trueTotal, 1300, 20, 20, BLUE);
+        string pHealth = std::to_string(player.getHealth());
+        pHealth = "Health " + pHealth;
+        const char* trueHealth = pHealth.c_str();
+        DrawText(trueHealth, 1100, 20, 20, BLUE);
+        enemy.Update();
+        player.Update();
     }
 
     CloseWindow();

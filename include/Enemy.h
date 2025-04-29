@@ -15,7 +15,9 @@ private:
     static int totalCats;
     const float BASE_SPEED = 5.0f; // Speed of the enemy
     int health = 125; // Health of the enemy 
-    Player* playerRef; // Reference to the player
+    Player* playerRef;
+    float attackCooldown = 0.0f;      // Tracks remaining cooldown time
+    const float ATTACK_COOLDOWN = 2.0f; // 2 seconds between attacks // Reference to the player
 public:
     Enemy(float x, float y, float z, Player* player);
     ~Enemy();

@@ -23,9 +23,18 @@ int Enemy::total() {
     return totalCats;  
 }
 
-void Enemy::Draw() const {  
-    DrawCube(position, 1.0f, 2.0f, 1.0f, ORANGE);  
+// Enemy.cpp
+void Enemy::Draw() const {
+    DrawCube(position, 1.0f, 2.0f, 1.0f, ORANGE);
+    
+    // Cooldown indicator (red ring)
+    if (attackCooldown > 0) {
+        DrawCircle3D(
+            position, 1.5f, {0, 1, 0}, 90.0f, Fade(RED, 0.5f)
+        );
+    }
 }
+
 void Enemy::Patrol(bool patrol) {
     static bool movingRight = true;
     if (!patrol) return; // If not patrolling, do nothing
@@ -41,16 +50,18 @@ void Enemy::Patrol(bool patrol) {
         }
     }
 }
+// Enemy.cpp
 void Enemy::Chase() {
-    // Chase logic
     if (!playerRef) return;
-    // Get player position directly
+
     Vector3 playerPos = playerRef->GetPosition();
-    
-    // Calculate direction
     Vector3 direction = Vector3Subtract(playerPos, position);
     float distance = Vector3Length(direction);
-    
+
+    // Cooldown logic
+    attackCooldown -= GetFrameTime(); // Decrement cooldown timer
+    if (attackCooldown < 0) attackCooldown = 0;
+
     if (distance < 5.0f) { // Chase if within 5 units
         direction = Vector3Normalize(direction);
         
@@ -58,8 +69,13 @@ void Enemy::Chase() {
         position = Vector3Add(position, 
             Vector3Scale(direction, BASE_SPEED * GetFrameTime())); // Move towards player #### IF YOU REMOVE GETFRAMETIME, THE ENEMY WILL TELEPORT
     }
-    if (distance < 1.0f) { // Attack if very close
-        Attack();
+
+    if (distance < 1.0f) { 
+        // Only attack if cooldown is ready
+        if (attackCooldown <= 0) {
+            Attack();
+            attackCooldown = ATTACK_COOLDOWN; // Reset cooldown
+        }
     }
 }
 
