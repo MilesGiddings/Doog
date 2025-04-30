@@ -24,5 +24,5 @@ public:
     void GenerateMap();  // Function to generate the maze
     void Draw() const;  // Function to draw the maze, floor/ceiling, and enemies
     bool CheckCollision(const BoundingBox& playerBounds);  // Function to check for collisions
-    void SpawnRandomEnemies();  // Function to spawn random enemies
+
 };

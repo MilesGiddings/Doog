@@ -15,7 +15,7 @@ int main() {
     SetExitKey(KEY_ESCAPE); // Enable ESC key to exit
     DisableCursor();
     
-    Player player(6.0f, 7.0f, 10.0f);
+    Player player(6.0f, 1.0f, 6.0f);
     Enemy enemy(10.0f, 1.0f, 20.0f, &player); // Create an enemy instance
     Level level;
     level.GenerateMap(); // Generate the map with walls
@@ -64,9 +64,9 @@ int main() {
 
                 int centerX = GetScreenWidth() / 2;
                 int centerY = GetScreenHeight() / 2;
-                
-                DrawCircle(centerX, centerY, 5, RED); // Tiny center dot
 
+
+                DrawCircle(centerX, centerY, 5, RED); // Tiny center dot
 
 
             EndDrawing();  // End 2D drawing
