@@ -7,6 +7,7 @@
 #include "Wall.h"
 #include "GameObject.h"
 #include <vector>
+
 class Level {
 private:
     int mazeWidth;
@@ -15,11 +16,13 @@ private:
     int corridorSize;
 
     std::vector<Wall> walls;  // List of walls in the maze
+    std::vector<Enemy> enemies; // List of enemies in the maze
 
 public:
     Level();  // Constructor
 
     void GenerateMap();  // Function to generate the maze
-    void Draw() const;  // Function to draw the maze and floor/ceiling
+    void Draw() const;  // Function to draw the maze, floor/ceiling, and enemies
     bool CheckCollision(const BoundingBox& playerBounds);  // Function to check for collisions
+    void SpawnRandomEnemies();  // Function to spawn random enemies
 };

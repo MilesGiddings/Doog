@@ -56,9 +56,9 @@ void Level::GenerateMap() {
     }
 
     // Adding walls around the opening (entrance) in green color (creating the doorway)
-    walls.push_back(Wall(entrancePosition.x - roomSize / 2, 0.0f, entrancePosition.z, roomSize, 20, corridorSize, true));   // Left of entrance (Green wall)
-    walls.push_back(Wall(entrancePosition.x + roomSize / 2, 0.0f, entrancePosition.z, roomSize, 20, corridorSize, true));   // Right of entrance (Green wall)
-    walls.push_back(Wall(entrancePosition.x, 0.0f, entrancePosition.z - roomSize / 2, corridorSize, 20, roomSize, true));   // Top of entrance (Green wall)
+    //walls.push_back(Wall(entrancePosition.x - roomSize / 2, 0.0f, entrancePosition.z, roomSize, 20, corridorSize, true));   // Left of entrance (Green wall)
+    //walls.push_back(Wall(entrancePosition.x + roomSize / 2, 0.0f, entrancePosition.z, roomSize, 20, corridorSize, true));   // Right of entrance (Green wall)
+    //walls.push_back(Wall(entrancePosition.x, 0.0f, entrancePosition.z - roomSize / 2, corridorSize, 20, roomSize, true));   // Top of entrance (Green wall)
 
     // Optional: Special markers or interactive points (like keys or items)
     walls.push_back(Wall(5.0f, 0.0f, 5.0f, 1.0f, 2.0f, 1.0f)); // Special marker "X"
@@ -69,9 +69,10 @@ void Level::Draw() const {
     DrawCube({ (mazeWidth * (roomSize + corridorSize)) / 2.0f, -0.1f, (mazeHeight * (roomSize + corridorSize)) / 2.0f }, 
              mazeWidth * (roomSize + corridorSize), 0.1f, mazeHeight * (roomSize + corridorSize), BLACK); // Floor
 
-    // Draw ceiling
-    DrawCube({ (mazeWidth * (roomSize + corridorSize)) / 2.0f, 20.1f, (mazeHeight * (roomSize + corridorSize)) / 2.0f }, 
-             mazeWidth * (roomSize + corridorSize), 0.1f, mazeHeight * (roomSize + corridorSize), BLACK); // Ceiling
+   // Draw ceiling (extend the ceiling beyond the maze size)
+   DrawCube({ (mazeWidth * (roomSize + corridorSize)) / 2.0f, 10.0f, (mazeHeight * (roomSize + corridorSize)) / 2.0f }, 
+   (mazeWidth * (roomSize + corridorSize)) * 1.5f, 0.1f, (mazeHeight * (roomSize + corridorSize)) * 1.5f, BLACK); // Extended Ceiling
+
 
     // Draw walls
     for (const auto& wall : walls) {

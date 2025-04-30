@@ -11,12 +11,12 @@ using namespace std;
 int main() {
     InitWindow(1920, 1080, "Doog");
     ToggleBorderlessWindowed();
-    SetTargetFPS(60);// If -1 is set, the program will run as fast as possible : This could be useful for pacing / scaling the game diffuculty
+    SetTargetFPS(60); // If -1 is set, the program will run as fast as possible
     SetExitKey(KEY_ESCAPE); // Enable ESC key to exit
     DisableCursor();
     
-    Player player(0.0f, 5.0f, 0.0f);
-    Enemy enemy(10.0f, 1.0f, 0.0f, &player); // Create an enemy instance
+    Player player(1.0f, 5.0f, 1.0f);
+    Enemy enemy(10.0f, 1.0f, 20.0f, &player); // Create an enemy instance
     Level level;
     level.GenerateMap(); // Generate the map with walls
 
@@ -28,24 +28,42 @@ int main() {
         }
 
         BeginDrawing();
-            ClearBackground(RAYWHITE);
-            BeginMode3D(player.GetCamera());
-                level.Draw();
+            ClearBackground(RAYWHITE);  // Clear the screen to white
+            BeginMode3D(player.GetCamera());  // Begin 3D rendering
+                level.Draw();  // Draw 3D level
                 player.Draw(); // Optional: Draw player model
-                enemy.Draw(); // Optional: Draw enemy model
-            EndMode3D();
-            DrawCircle(GetScreenWidth()/2, GetScreenHeight()/2, 5, GREEN);
-        EndDrawing();
+                enemy.Draw();  // Optional: Draw enemy model
+            EndMode3D();  // End 3D rendering
 
-        DrawFPS(1365, 0);
-        string eTotal = std::to_string(enemy.total());
-        eTotal = "Total Cats: " + eTotal;
-        const char* trueTotal = eTotal.c_str();
-        DrawText(trueTotal, 1300, 20, 20, BLUE);
-        string pHealth = std::to_string(player.getHealth());
-        pHealth = "Health " + pHealth;
-        const char* trueHealth = pHealth.c_str();
-        DrawText(trueHealth, 1100, 20, 20, BLUE);
+            // Now we can draw 2D UI elements like FPS, health, etc.
+            BeginDrawing();  // Start drawing 2D elements
+
+                // FPS Display
+                DrawFPS(1365, 0);
+
+                // Display number of cats
+                string eTotal = std::to_string(enemy.total());
+                eTotal = "Total Cats: " + eTotal;
+                const char* trueTotal = eTotal.c_str();
+                DrawText(trueTotal, 1300, 20, 20, BLUE);
+
+                // Display player health
+                string pHealth = std::to_string(player.getHealth());
+                pHealth = "Health " + pHealth;
+                const char* trueHealth = pHealth.c_str();
+                DrawText(trueHealth, 1100, 20, 20, BLUE);
+
+                // Display player position for debugging purposes
+                Vector3 playerPos = player.GetPosition();  // Get the player's position
+                string positionText = "Player Position: X=" + std::to_string(playerPos.x) + 
+                                      " Y=" + std::to_string(playerPos.y) + 
+                                      " Z=" + std::to_string(playerPos.z);
+                const char* truePosition = positionText.c_str();
+                DrawText(truePosition, 100, 100, 20, GREEN);  // Display position in the top-left corner
+
+            EndDrawing();  // End 2D drawing
+
+        // Update player and enemy
         enemy.Update();
         player.Update();
     }

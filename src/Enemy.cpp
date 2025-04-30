@@ -13,8 +13,6 @@ Enemy::Enemy(float x, float y, float z, Player* player)
     totalCats++;
 }
 
-
-
 Enemy::~Enemy() {  
     totalCats--;  
 }
