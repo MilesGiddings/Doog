@@ -8,14 +8,15 @@
 #include "GameObject.h"
 #include "raymath.h"
 
+
 class Player : public GameObject {
 private:
-    Camera3D camera;
-    float rotationAngle;
+    Camera3D camera; // Camera for the player
+    float rotationAngle; // Angle of rotation
     int health = 100;
-    int maxHealth = 200;
+    const int maxHealth = 200;
 public:
-    Player(float x, float y, float z);
+    Player(float x, float y, float z); 
     void Update() override;
     void Draw() const override;
     Camera3D& GetCamera() { return camera; }
@@ -24,5 +25,7 @@ public:
         health -= damage;
         if (health < 0) health = 0; // Prevent negative health
     }
-    int getHealth() const { return health; }
+    int getHealth() const { return health; } // Get current health
+    void Shoot(std::vector<Enemy>& enemies); // Function to shoot at enemies
+
 };

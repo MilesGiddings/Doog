@@ -21,8 +21,9 @@ private:
 public:
     Level();  // Constructor
 
-    void GenerateMap();  // Function to generate the maze
-    void Draw() const;  // Function to draw the maze, floor/ceiling, and enemies
+    void GenerateMap(Player* playerRef); // Function to generate the map
+    void Draw() const;  // Function to draw the everything in the level, floor/ceiling, and enemies
     bool CheckCollision(const BoundingBox& playerBounds);  // Function to check for collisions
-
+    std::vector<Enemy>& GetEnemies() { return enemies; } // Function to get enemies
+    void RemoveDeadEnemies();  // Function to remove dead enemies
 };

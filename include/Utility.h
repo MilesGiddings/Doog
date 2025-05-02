@@ -8,5 +8,5 @@
 #include "Wall.h"
 #include "GameObject.h"
 
-// Renamed to avoid conflict
+
 Texture2D LoadGameTexture(const std::string& path, bool useDefault = true);

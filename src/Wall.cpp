@@ -12,7 +12,7 @@ Wall::Wall(float x, float y, float z, float width, float height, float depth, bo
 
 void Wall::Draw() const {
     if (isEntrance) {
-        DrawCube(position, size.x, size.y, size.z, GREEN);  // Draw green wall for entrance
+        DrawCube(position, size.x, size.y, size.z, GREEN);  // Draw green wall for entrance | got rid of this idea
     } else {            
         DrawCube(position, size.x, size.y, size.z, GRAY);   // Default wall color
     }

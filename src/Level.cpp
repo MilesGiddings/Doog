@@ -15,7 +15,7 @@ Level::Level() {
     corridorSize = 2;  // Size of corridors between rooms
 }
 
-void Level::GenerateMap() {
+void Level::GenerateMap(Player* playerRef) {
     // Set spawn point (entrance)
     Vector3 entrancePosition = { static_cast<float>(roomSize), 0.0f, static_cast<float>(roomSize) };  // Entrance at (roomSize, 0, roomSize)
 
@@ -55,13 +55,18 @@ void Level::GenerateMap() {
         walls.push_back(Wall(mazeWidth * (roomSize + corridorSize), 0.0f, i * (roomSize + corridorSize), 5, 20, roomSize + 1));  // Right wall with overlap
     }
 
-    // Adding walls around the opening (entrance) in green color (creating the doorway)
-    //walls.push_back(Wall(entrancePosition.x - roomSize / 2, 0.0f, entrancePosition.z, roomSize, 20, corridorSize, true));   // Left of entrance (Green wall)
-    //walls.push_back(Wall(entrancePosition.x + roomSize / 2, 0.0f, entrancePosition.z, roomSize, 20, corridorSize, true));   // Right of entrance (Green wall)
-    //walls.push_back(Wall(entrancePosition.x, 0.0f, entrancePosition.z - roomSize / 2, corridorSize, 20, roomSize, true));   // Top of entrance (Green wall)
+    enemies.push_back(Enemy(11.0f, 1.0f, 25.0f, playerRef));
+    enemies.push_back(Enemy(31.0f, 1.0f, 35.0f, playerRef));
+    enemies.push_back(Enemy(31.0f, 1.0f, 37.0f, playerRef));
+    enemies.push_back(Enemy(31.0f, 1.0f, 40.0f, playerRef));
+    enemies.push_back(Enemy(11.0f, 1.0f, 35.0f, playerRef));
+    enemies.push_back(Enemy(11.0f, 1.0f, 40.0f, playerRef));
+    //enemies.push_back(Enemy(11.0f, 1.0f, 25.0f, playerRef));
+    //enemies.push_back(Enemy(11.0f, 1.0f, 25.0f, playerRef));
+    //enemies.push_back(Enemy(11.0f, 1.0f, 25.0f, playerRef));
+    //enemies.push_back(Enemy(11.0f, 1.0f, 25.0f, playerRef));
+    // Adding enemies to the map specifically
 
-    // Optional: Special markers or interactive points (like keys or items)
-    walls.push_back(Wall(5.0f, 0.0f, 5.0f, 1.0f, 2.0f, 1.0f)); // Special marker "X"
 }
 
 void Level::Draw() const {
@@ -80,6 +85,16 @@ void Level::Draw() const {
     }
 }
 
+void Level::RemoveDeadEnemies() {
+    enemies.erase(
+        std::remove_if(enemies.begin(), enemies.end(), [](Enemy& e) {
+            return e.IsDead();
+        }),
+        enemies.end()// Remove dead enemies from the vector
+    );
+}   
+
+//Useless function, but kept for future use, hopefully I can get collision detection working properly
 bool Level::CheckCollision(const BoundingBox& playerBounds) {
     for (const auto& wall : walls) {
         if (CheckCollisionBoxes(playerBounds, wall.GetBounds())) return true;
